@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Performance{% endblock %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Student Performance Report</h2>
+
+<!-- Summary Cards -->
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+
+    <div style="background:#2c3e50; color:white; padding:15px; border-radius:10px; min-width:220px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+        <h3 style="margin:0 0 8px 0; font-size:16px;">Topper Student</h3>
+        {% if topper %}
+            <p style="font-size:20px; margin:0;">{{ topper[0] }}</p>
+            <p style="margin:6px 0 0 0;">{{ topper[3] }}%</p>
+        {% else %}
+            <p style="margin:0;">No data</p>
+        {% endif %}
+    </div>
+
+    <div style="background:#16a085; color:white; padding:15px; border-radius:10px; min-width:220px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+        <h3 style="margin:0 0 8px 0; font-size:16px;">Average Percentage</h3>
+        <p style="font-size:20px; margin:0;">{{ average_percentage }}%</p>
+    </div>
+
+    <div style="background:#8e44ad; color:white; padding:15px; border-radius:10px; min-width:220px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+        <h3 style="margin:0 0 8px 0; font-size:16px;">Students Tested</h3>
+        <p style="font-size:20px; margin:0;">{{ students_tested }}</p>
+    </div>
+
+</div>
+
+<!-- Performance Table -->
+<div style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+    <h3 style="margin-top:0;">Ranked Student Report</h3>
+
+    <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#2c3e50; color:white;">
+            <th style="padding:10px;">Rank</th>
+            <th>Name</th>
+            <th>Total Marks</th>
+            <th>Out Of</th>
+            <th>Percentage</th>
+        </tr>
+
+        {% for r in report %}
+        <tr style="text-align:center;">
+            <td style="padding:10px;">{{ loop.index }}</td>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

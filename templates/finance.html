@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Finance{% endblock %}
+
+{% block content %}
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+
+    <div style="background:#27ae60; color:white; padding:20px; border-radius:10px; min-width:220px;">
+        <h3 style="margin:0 0 10px 0;">Total Income</h3>
+        <p style="font-size:24px; margin:0;">₹ {{ total_income }}</p>
+    </div>
+
+    <div style="background:#e74c3c; color:white; padding:20px; border-radius:10px; min-width:220px;">
+        <h3 style="margin:0 0 10px 0;">Total Expense</h3>
+        <p style="font-size:24px; margin:0;">₹ {{ total_expense }}</p>
+    </div>
+
+    <div style="background:#2c3e50; color:white; padding:20px; border-radius:10px; min-width:220px;">
+        <h3 style="margin:0 0 10px 0;">Profit / Loss</h3>
+        <p style="font-size:24px; margin:0;">₹ {{ profit }}</p>
+    </div>
+
+</div>
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+
+    <div style="background:#8e44ad; color:white; padding:20px; border-radius:10px; min-width:220px;">
+        <h3 style="margin:0 0 10px 0;">Total Student Fees</h3>
+        <p style="font-size:24px; margin:0;">₹ {{ total_student_fees }}</p>
+    </div>
+
+    <div style="background:#16a085; color:white; padding:20px; border-radius:10px; min-width:220px;">
+        <h3 style="margin:0 0 10px 0;">Fees Collected</h3>
+        <p style="font-size:24px; margin:0;">₹ {{ total_fees_collected }}</p>
+    </div>
+
+    <div style="background:#c0392b; color:white; padding:20px; border-radius:10px; min-width:220px;">
+        <h3 style="margin:0 0 10px 0;">Fees Pending</h3>
+        <p style="font-size:24px; margin:0;">₹ {{ total_fees_pending }}</p>
+    </div>
+
+</div>
+
+<h2 style="margin-bottom:20px;">Finance Management</h2>
+
+<!-- FORM -->
+<div style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08); margin-bottom:20px;">
+    
+    <h3>Add Finance Entry</h3>
+
+    <form method="POST" style="display:flex; gap:10px; flex-wrap:wrap;">
+
+        <select name="type" required style="padding:10px;">
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+        </select>
+
+        <input type="text" name="description" placeholder="Description" required style="padding:10px;">
+
+        <input type="number" name="amount" placeholder="Amount" required style="padding:10px;">
+
+        <button type="submit" style="padding:10px 20px; background:#3498db; color:white; border:none; border-radius:5px;">
+            Save
+        </button>
+
+    </form>
+</div>
+
+<!-- TABLE -->
+<div style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+    
+    <h3>Finance Records</h3>
+
+    <table style="width:100%; border-collapse:collapse;">
+
+        <tr style="background:#2c3e50; color:white;">
+            <th style="padding:10px;">ID</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+
+        {% for r in records %}
+<tr style="text-align:center;">
+    <td style="padding:10px;">{{ r[0] }}</td>
+    <td>{{ r[1] }}</td>
+    <td>{{ r[2] }}</td>
+    <td>₹ {{ r[3] }}</td>
+    <td>{{ r[4] }}</td>
+
+    <td>
+        <a href="/edit_finance/{{ r[0] }}" style="background:#f39c12; color:white; padding:6px 12px; border-radius:5px;">
+            Edit
+        </a>
+    </td>
+
+    <td>
+        <a href="/delete_finance/{{ r[0] }}" onclick="return confirm('Delete this record?')" style="background:#e74c3c; color:white; padding:6px 12px; border-radius:5px;">
+            Delete
+        </a>
+    </td>
+</tr>
+{% endfor %}
+
+    </table>
+
+</div>
+<div style="background:white; padding:20px; border-radius:10px; margin-top:20px;">
+    <h3>Monthly Financial Report</h3>
+
+    <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#2c3e50; color:white;">
+            <th style="padding:10px;">Month</th>
+            <th>Income</th>
+            <th>Expense</th>
+            <th>Profit</th>
+        </tr>
+
+        {% for m in monthly_report %}
+        <tr style="text-align:center;">
+            <td style="padding:10px;">{{ m[0] }}</td>
+            <td>₹ {{ m[1] }}</td>
+            <td>₹ {{ m[2] }}</td>
+            <td>₹ {{ m[1] - m[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div style="background:white; padding:20px; border-radius:10px; margin-top:20px;">
+    <h3>Yearly Financial Report</h3>
+
+    <table style="width:100%; border-collapse:collapse;">
+        <tr style="background:#2c3e50; color:white;">
+            <th style="padding:10px;">Year</th>
+            <th>Income</th>
+            <th>Expense</th>
+            <th>Profit / Loss</th>
+        </tr>
+
+        {% for y in yearly_report %}
+        <tr style="text-align:center;">
+            <td style="padding:10px;">{{ y[0] }}</td>
+            <td>₹ {{ y[1] }}</td>
+            <td>₹ {{ y[2] }}</td>
+            <td>₹ {{ y[1] - y[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

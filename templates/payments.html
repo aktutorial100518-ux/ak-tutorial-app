@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Payments{% endblock %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Student Payment Details</h2>
+
+<!-- Summary Cards -->
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px;">
+
+    <div style="background:#2c3e50; color:white; padding:15px; border-radius:10px; min-width:200px;">
+        <h3 style="margin:0;">Total Fees</h3>
+        <p style="font-size:20px; margin:5px 0 0 0;">₹ {{ total_fees }}</p>
+    </div>
+
+    <div style="background:#16a085; color:white; padding:15px; border-radius:10px; min-width:200px;">
+        <h3 style="margin:0;">Paid</h3>
+        <p style="font-size:20px; margin:5px 0 0 0;">₹ {{ paid }}</p>
+    </div>
+
+    <div style="background:#c0392b; color:white; padding:15px; border-radius:10px; min-width:200px;">
+        <h3 style="margin:0;">Pending</h3>
+        <p style="font-size:20px; margin:5px 0 0 0;">₹ {{ pending }}</p>
+    </div>
+
+</div>
+
+<!-- Payment Form -->
+<div style="background:white; padding:20px; border-radius:10px; margin-bottom:20px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+    
+    <h3>Add Payment</h3>
+
+    <form method="POST" style="display:flex; gap:10px; flex-wrap:wrap;">
+
+        <input type="number" name="amount" placeholder="Enter Amount" required style="padding:10px;">
+
+        <button type="submit" style="padding:10px 20px; background:#3498db; color:white; border:none; border-radius:5px;">
+            Add Payment
+        </button>
+
+    </form>
+</div>
+
+<!-- Payment Table -->
+<div style="background:white; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.08);">
+    
+    <h3>Payment History</h3>
+
+    <table style="width:100%; border-collapse:collapse;">
+
+        <tr style="background:#2c3e50; color:white;">
+            <th style="padding:10px;">ID</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Edit</th>
+            <th>Receipt</th>
+        </tr>
+
+        {% for p in payments %}
+        <tr style="text-align:center;">
+            <td style="padding:10px;">{{ p[0] }}</td>
+            <td>₹ {{ p[2] }}</td>
+            <td>{{ p[3] }}</td>
+
+            <td>
+                <a href="/edit_payment/{{ p[0] }}" style="background:#f39c12; color:white; padding:6px 12px; border-radius:5px;">
+                    Edit
+                </a>
+            </td>
+
+            <td>
+                <a href="/receipt/{{ sid }}" style="background:#2ecc71; color:white; padding:6px 12px; border-radius:5px;">
+                    View
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+{% endblock %}

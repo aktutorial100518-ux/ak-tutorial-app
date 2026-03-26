@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}A.K. Tutorial{% endblock %}</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f9;
+            margin:0;
+            padding:0;
+        }
+
+        .topbar{
+            background:#2c3e50;
+            color:white;
+            padding:15px 25px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .content{
+            padding:20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+    A.K. Tutorial Fees Management App
+</div>
+
+<div style="background:#34495e; padding:10px;">
+    <a href="/" style="color:white; margin-right:15px;">Dashboard</a>
+    <a href="/students" style="color:white; margin-right:15px;">Students</a>
+    <a href="/attendance" style="color:white; margin-right:15px;">Attendance</a>
+    <a href="/payments" style="color:white; margin-right:15px;">Payments</a>
+    <a href="/finance" style="color:white; margin-right:15px;">Finance</a>
+    <a href="/pending_fees" style="color:white;">Pending Fees</a>
+    <a href="/performance" style="color:white; margin-left:15px;">Performance</a>
+</div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

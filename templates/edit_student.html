@@ -1,0 +1,27 @@
+<h2>Edit Student</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+Name <input name="name" value="{{student[1]}}"><br><br>
+
+Class <input name="class_name" value="{{student[2]}}"><br><br>
+
+Parent <input name="parent" value="{{student[3]}}"><br><br>
+
+Mobile <input name="mobile" value="{{student[4]}}"><br><br>
+
+Total Fees <input name="total_fees" value="{{student[5]}}"><br><br>
+
+Current Photo<br>
+{% if student[6] %}
+<img src="/static/uploads/{{student[6]}}" width="80"><br><br>
+{% endif %}
+
+Change Photo <input type="file" name="photo"><br><br>
+
+<button type="submit">Update Student</button>
+
+</form>
+
+<br>
+<a href="/students">Back</a>
